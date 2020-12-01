@@ -1,0 +1,17 @@
+.form {
+  max-width: 50vw;
+}
+.field-set {
+  background-color: #d4d4d48a;
+  display: inline-block;
+
+  margin: 1rem;
+}
+legend {
+  font-weight: 600;
+}
+.field-set_line {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
