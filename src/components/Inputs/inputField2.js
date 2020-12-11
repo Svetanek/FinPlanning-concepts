@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import FormInput from '../form-input/form-input.js'
 import './inputFields.styles.css'
 
 //move state up, use useMemo
@@ -8,6 +9,9 @@ const LoanField2 = (props) =>  {
 
   const [inputData2, setInputData2] = useState(
     {
+      premium: '',
+      targetYear: '',
+      targetBalance: '',
       projectedBalance: '',
       baseValue: '',
       tax: '',
@@ -15,7 +19,7 @@ const LoanField2 = (props) =>  {
       diffAmount: ''
       }
   )
-  const {projectedBalance, baseValue, tax, afterTaxAmount, diffAmount} = inputData2;
+  const {premium, targetYear, targetBalance, projectedBalance, baseValue, tax, afterTaxAmount, diffAmount} = inputData2;
   const {extrapay, timeLeft, futureBalance } = props.inputData;
   const roundedYears = Math.round(timeLeft/12);
 
@@ -34,40 +38,26 @@ const LoanField2 = (props) =>  {
   }
 
     return (
-
+      <div className="form-container">
       <form onSubmit={handleSubmit}>
        <fieldset className="field-set">
          <legend>Input LI Details</legend>
-         <div className="field-set_line">
-         <label htmlFor="extrapay">Additional Payment</label>
-         <input id="extrapay" name="extrapay" value={extrapay} />
-         </div>
-
-         <div className="field-set_line">
-         <label htmlFor="targetYear">Target Year</label>
-         <input  id="targetYear" name="targetYear" value={roundedYears} />
-         </div>
-         <div className="field-set_line">
-         <label htmlFor="targetBalance">Target Balance</label>
-         <input  id="targetBalance" name="targetBalance" value={futureBalance} />
-         </div>
-         <div className="field-set_line">
-         <label htmlFor="projectedBalance">Input Projected Balance in {roundedYears}th year</label>
-         <input  id="projectedBalance" name="projectedBalance" value={projectedBalance} onChange={handleChange} />
-         </div>
-         <div className="field-set_line">
-         <label htmlFor="baseValue">Input Base value</label>
-         <input  id="baseValue" name="baseValue" value={baseValue} onChange={handleChange} />
-         </div>
-         <div className="field-set_line">
-         <label htmlFor="tax">Input Tax bracket</label>
-         <input  id="tax" name="tax" value={tax} onChange={handleChange} />
-         </div>
+         <FormInput name="payment" value={extrapay? extrapay : premium} onChange={handleChange} >Premium</FormInput>
+         <FormInput name="targetYear" value={roundedYears? roundedYears : targetYear} onChange={handleChange}>Target Year</FormInput>
+         <FormInput name="targetBalance" value={futureBalance? futureBalance: targetBalance} onChange={handleChange} >Target Balance</FormInput>
+         <FormInput name="projectedBalance" value={projectedBalance} onChange={handleChange} >Input Projected Balance in {roundedYears}th year</FormInput>
+         <FormInput name="baseValue" value={baseValue} onChange={handleChange} >Input Base Value</FormInput>
+         <FormInput name="tax" value={tax} onChange={handleChange} >Input Tax %</FormInput>
          <button type="submit" >Calculate</button>
        </fieldset>
+       </form>
+       <div className="form-text">
+       {afterTaxAmount? <div>
        <p>With Lump Summ withdrawal the amount after tax is equal to {afterTaxAmount}. The difference with the target amount is ${diffAmount} </p>
        <p>Run the illustration for continuation of monthly payments from Cash Value</p>
-       </form>
+       </div> : null }
+       </div>
+       </div>
 
    )
   }

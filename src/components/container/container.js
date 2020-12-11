@@ -7,7 +7,7 @@ const StyledMain = styled.div`
 display: flex;
 justify-content: center;
 `
-const StyledHeader = styled.p`
+const StyledHeader = styled.h2`
 text-align: center;
 `
 

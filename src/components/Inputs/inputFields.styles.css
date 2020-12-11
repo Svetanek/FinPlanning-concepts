@@ -1,17 +1,22 @@
-.form {
-  max-width: 50vw;
+.form-container {
+  width: 50%;
+}
+
+form {
+  height: 20rem;
+  width: 35rem;
 }
 .field-set {
   background-color: #d4d4d48a;
   display: inline-block;
-
+  position: relative;
   margin: 1rem;
+  height: 20rem;
 }
-legend {
-  font-weight: 600;
+button {
+  position: absolute;
+  bottom: 1rem;
 }
-.field-set_line {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem;
+.form-text {
+  margin-top: 3rem;
 }
