@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import FormInput from '../form-input/form-input.js'
-import './inputFields.styles.css'
+import './inputFields.styles.scss'
 
 //move state up, use useMemo
 
@@ -39,9 +39,9 @@ const LoanField2 = (props) =>  {
 
     return (
       <div className="form-container">
-      <form onSubmit={handleSubmit}>
-       <fieldset className="field-set">
-         <legend>Input LI Details</legend>
+      <form onSubmit={handleSubmit} className="form">
+       <fieldset className="form-fieldset">
+         <legend className="form-legend">Input LI Details</legend>
          <FormInput name="payment" value={extrapay? extrapay : premium} onChange={handleChange} >Premium</FormInput>
          <FormInput name="targetYear" value={roundedYears? roundedYears : targetYear} onChange={handleChange}>Target Year</FormInput>
          <FormInput name="targetBalance" value={futureBalance? futureBalance: targetBalance} onChange={handleChange} >Target Balance</FormInput>
@@ -53,8 +53,8 @@ const LoanField2 = (props) =>  {
        </form>
        <div className="form-text">
        {afterTaxAmount? <div>
-       <p>With Lump Summ withdrawal the amount after tax is equal to {afterTaxAmount}. The difference with the target amount is ${diffAmount} </p>
-       <p>Run the illustration for continuation of monthly payments from Cash Value</p>
+       <p>With Lump Summ withdrawal the amount after tax is equal to {afterTaxAmount}. The difference with the target amount is {diffAmount}. </p>
+       <p>Run the illustration for continuation of monthly payments from Cash Value.</p>
        </div> : null }
        </div>
        </div>

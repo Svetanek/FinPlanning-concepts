@@ -4,10 +4,13 @@ const GlobalStyle = createGlobalStyle`
 body {
   font-family: 'Lora';
   font-weight: 400;
-  background-color: #c1fce8;;
-  padding: 20px 40px;
-  @media screen and (max-width: 800px) {
-padding: 10px;
+  font-size: 16px;
+
+  // background-color: #c1fce8;
+  background-color: #83ced4;
+  padding: 20px;
+  @media screen and (max-width: 900px) {
+  padding: 12px;
   }
 }
 

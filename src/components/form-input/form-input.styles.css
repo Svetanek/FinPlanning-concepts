@@ -1,18 +1,25 @@
-.field-set {
-  background-color: #d4d4d48a;
-  display: inline-block;
-
-  margin: 1rem;
-}
-
-.field-set_line {
+.fieldset_line {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
 }
-legend {
+/* legend {
+  font-size: 1.2rem;
   font-weight: 600;
-}
+} */
 input {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
+  padding: 0.2 0.5rem;
+  background-color: rgb(232, 240, 254);
+  border-color: rgba(175, 174, 174, 0.897);
+  outline: none;
+}
+input:focus,
+input:active {
+  outline: none;
+}
+@media screen and (max-width: 500px) {
+  input {
+    width: 5rem;
+  }
 }

@@ -5,13 +5,26 @@ import {calcTime, calcFutureBalance} from '../../utils';
 import styled from 'styled-components';
 const StyledMain = styled.div`
 display: flex;
-justify-content: center;
+justify-content: space-between;
+width: 100%;
+@media screen and (max-width: 900px) {
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 `
 const StyledHeader = styled.h2`
 text-align: center;
+padding: 1rem;
+color: #044a4f;
+@media screen and (max-width: 900px) {
+  font-size: 1.3em;
+  padding: 0.3rem;
+}
 `
 
-
+//use Memo, insert comma for thousands, add new button, get rid of input color change, responsive design
 const Container = () => {
 const [inputData, setData] = useState({
       loan: '',

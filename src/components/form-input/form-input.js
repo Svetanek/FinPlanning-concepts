@@ -1,10 +1,10 @@
 import React from 'react';
-import './form-input.styles.css';
+import './form-input.styles.scss';
 
 const FormInput = ({children, handleChange, htmlFor, ...otherProps}) => (
-  <div className="field-set_line">
+  <div className="fieldset_line">
   <label  >{children}</label>
-  <input  className="form-input"
+  <input  className="fieldset_input"
       onChange={handleChange}
       {...otherProps} />
   </div>

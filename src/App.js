@@ -1,7 +1,7 @@
 
 import GlobalStyle from './global-styles.js';
 import Container from './components/container/container'
-import './App.css';
+// import './App.css';
 
 function App() {
   return (

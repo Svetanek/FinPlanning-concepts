@@ -1,0 +1,50 @@
+.form-container {
+  width: 50%;
+  padding: 2rem;
+  @media screen and (max-width: 1200px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+    padding: 0;
+  }
+
+  .form {
+    height: 20rem;
+    width: 80%;
+
+    @media screen and (max-width: 1200px) {
+      width: 100%;
+    }
+
+    &-fieldset {
+      background-color: #d4d4d48a;
+      display: inline-block;
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    &-legend {
+      color: #044a4f;
+    }
+
+    button {
+      position: absolute;
+      bottom: 1rem;
+      padding: 0.2rem;
+      background-color: #0c8f99;
+      color: #ffffff;
+    }
+  }
+  .form-text {
+    margin: 3rem 0;
+    width: 30rem;
+    @media screen and (max-width: 1200px) {
+      width: 100%;
+    }
+  }
+}
