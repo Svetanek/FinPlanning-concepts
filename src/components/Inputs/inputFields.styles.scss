@@ -29,15 +29,21 @@
     }
 
     &-legend {
+      font-size: 1.3rem;
+      font-weight: 600;
       color: #044a4f;
     }
 
     button {
       position: absolute;
       bottom: 1rem;
-      padding: 0.2rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
       background-color: #0c8f99;
       color: #ffffff;
+      &:active {
+        outline: none;
+      }
     }
   }
   .form-text {

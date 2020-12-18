@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import FormInput from '../form-input/form-input.js'
+import {formStringToNum} from '../../utils'
 import './inputFields.styles.scss'
 
-//move state up, use useMemo
 
 
 const LoanField2 = (props) =>  {
@@ -25,16 +25,22 @@ const LoanField2 = (props) =>  {
 
   const handleChange = (e) => {
     const {name, value} = e.target;
-    setInputData2({...inputData2, [name] : value})
+    const formattedVal = value.length > 3? parseFloat(value).toLocaleString('en'): value;
+    setInputData2({...inputData2, [name] : formattedVal})
 
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submitted');
-    let taxAmount = (projectedBalance - baseValue) * tax * 0.01;
-    let afterTax = projectedBalance - taxAmount;
-    let diff = (afterTax - futureBalance).toString();
-    setInputData2({...inputData2, afterTaxAmount: afterTax, diffAmount: diff})
+    const projBalNum = formStringToNum(projectedBalance);
+    const baseValNum = formStringToNum(baseValue);
+    // const taxNum = formStringToNum(tax)
+    const futBal = formStringToNum(futureBalance);
+
+
+    let taxAmount = (projBalNum - baseValNum) * tax * 0.01;
+    let afterTax = projBalNum - taxAmount;
+    let diff = (afterTax - futBal);
+    setInputData2({...inputData2, afterTaxAmount: afterTax.toLocaleString('en'), diffAmount: diff.toLocaleString('en')})
   }
 
     return (
@@ -53,7 +59,7 @@ const LoanField2 = (props) =>  {
        </form>
        <div className="form-text">
        {afterTaxAmount? <div>
-       <p>With Lump Summ withdrawal the amount after tax is equal to {afterTaxAmount}. The difference with the target amount is {diffAmount}. </p>
+       <p>With Lump Summ withdrawal the amount after tax is equal to ${afterTaxAmount}. The difference with the target amount is {diffAmount}. </p>
        <p>Run the illustration for continuation of monthly payments from Cash Value.</p>
        </div> : null }
        </div>

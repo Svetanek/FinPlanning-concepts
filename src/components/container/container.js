@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useMemo} from 'react'
 import LoanField1 from '../Inputs/inputField1';
 import LoanField2 from '../Inputs/inputField2';
-import {calcTime, calcFutureBalance} from '../../utils';
+import {calcTime, calcFutureBalance, formStringToNum} from '../../utils';
 import styled from 'styled-components';
 const StyledMain = styled.div`
 display: flex;
@@ -23,8 +23,6 @@ color: #044a4f;
   padding: 0.3rem;
 }
 `
-
-//use Memo, insert comma for thousands, add new button, get rid of input color change, responsive design
 const Container = () => {
 const [inputData, setData] = useState({
       loan: '',
@@ -32,24 +30,38 @@ const [inputData, setData] = useState({
       payment: '',
       interest: '',
       extrapay: '',
-      timeLeft: '',
+      timeLeft: 0,
       futureBalance: ''
 })
 const {balance, payment, interest, extrapay} = inputData;
 
-  const handleChange =(e) => {
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setData({ ...inputData, [name]: value });
+    const formattedVal = value.length > 3? parseFloat(value).toLocaleString('en'): value;
+    setData({ ...inputData, [name]: formattedVal });
+
   }
+
+  // let paymentNum = parseFloat(payment);
+  //   let totalPay = paymentNum + parseFloat(extrapay);
+  //   let balanceNum = parseFloat(balance);
+  //   let interestNum = parseFloat(interest) * 0.01/12;
+    // const time = useMemo(() => calcTime(balanceNum, interestNum, totalPay), [balanceNum, interestNum, totalPay]);
+
+    // const futureBal = useMemo(() => calcFutureBalance(balanceNum, paymentNum, interestNum, time), [balanceNum, paymentNum, interestNum, time]) ;
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let paymentNum = parseFloat(payment);
-    let totalPay = paymentNum + parseFloat(extrapay);
-    let balanceNum = parseFloat(balance);
-    let interestNum = parseFloat(interest) * 0.01/12;
-    let time = calcTime(balanceNum, interestNum, totalPay);
-    let futureBal =  calcFutureBalance(balanceNum, paymentNum, interestNum, time);
+    const paymentNum = formStringToNum(payment);
+    const totalPay = paymentNum + formStringToNum(extrapay);
+    const balanceNum = formStringToNum(balance);
+    const interestNum = formStringToNum(interest) * 0.01/12;
+    const time = calcTime(balanceNum, interestNum, totalPay);
+
+    const futureBal =  calcFutureBalance(balanceNum, paymentNum, interestNum, time);
     await setData({...inputData,
       timeLeft: time,
       futureBalance: futureBal}

@@ -25,7 +25,7 @@ const LoanField1 = ({handleChange, handleSubmit, inputData}) => {
        </fieldset>
        </form>
        <div className='form-text'>
-       {futBal? <div><p>Remaining time to pay off the loan/mortgage is {years} years and {months} months.</p><p>The Future Balance at that time with the current payments without extra payment is ${futBal}.</p> </div> : null}
+       {futBal? <div><p>Remaining time to pay off is {years} years and {months} months.</p><p>The Future Balance at that time with the current payments without extra payment is ${futBal}.</p> </div> : null}
        </div>
       </div>
    )
