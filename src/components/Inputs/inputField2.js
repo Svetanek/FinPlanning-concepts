@@ -48,11 +48,11 @@ const LoanField2 = (props) =>  {
       <form onSubmit={handleSubmit} className="form">
        <fieldset className="form-fieldset">
          <legend className="form-legend">Input LI Details</legend>
-         <FormInput name="payment" value={extrapay? extrapay : premium} onChange={handleChange} >Premium</FormInput>
+         <FormInput name="premium" value={extrapay? extrapay : premium} onChange={handleChange} currency >Premium</FormInput>
          <FormInput name="targetYear" value={roundedYears? roundedYears : targetYear} onChange={handleChange}>Target Year</FormInput>
-         <FormInput name="targetBalance" value={futureBalance? futureBalance: targetBalance} onChange={handleChange} >Target Balance</FormInput>
-         <FormInput name="projectedBalance" value={projectedBalance} onChange={handleChange} >Input Projected Balance in {roundedYears}th year</FormInput>
-         <FormInput name="baseValue" value={baseValue} onChange={handleChange} >Input Base Value</FormInput>
+         <FormInput name="targetBalance" value={futureBalance? futureBalance: targetBalance} onChange={handleChange} currency required>Target Balance</FormInput>
+         <FormInput name="projectedBalance" value={projectedBalance} onChange={handleChange} currency required >Input Projected Balance in {roundedYears}th year</FormInput>
+         <FormInput name="baseValue" value={baseValue} onChange={handleChange} currency required >Input Base Value</FormInput>
          <FormInput name="tax" value={tax} onChange={handleChange} >Input Tax %</FormInput>
          <button type="submit" >Calculate</button>
        </fieldset>

@@ -17,10 +17,10 @@ const LoanField1 = ({handleChange, handleSubmit, inputData}) => {
         <form onSubmit={handleSubmit} className="form">
        <fieldset className="form-fieldset">
          <legend className="form-legend">Input Loan Details</legend>
-         <FormInput name="balance" value={balance} onChange={handleChange} required>Enter Current Balance</FormInput>
-         <FormInput name="interest" value={interest} onChange={handleChange} required>Enter Interest</FormInput>
-         <FormInput name="payment" value={payment} onChange={handleChange} required>Enter Payment</FormInput>
-         <FormInput name="extrapay" value={extrapay} onChange={handleChange} required>Enter Additional Payment</FormInput>
+         <FormInput name="balance" value={balance} onChange={handleChange} currency required>Enter Current Balance</FormInput>
+         <FormInput name="interest" value={interest} onChange={handleChange} required>Enter Interest % </FormInput>
+         <FormInput name="payment" value={payment} onChange={handleChange} currency required>Enter Payment</FormInput>
+         <FormInput name="extrapay" value={extrapay} onChange={handleChange} currency required>Enter Additional Payment</FormInput>
          <button type="submit" >Calculate time to pay off the balance</button>
        </fieldset>
        </form>

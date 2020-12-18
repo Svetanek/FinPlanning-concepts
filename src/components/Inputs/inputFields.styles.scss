@@ -8,7 +8,7 @@
     width: 100%;
   }
   @media screen and (max-width: 500px) {
-    font-size: 10px;
+    font-size: 12px;
     padding: 0;
   }
 
@@ -43,6 +43,10 @@
       color: #ffffff;
       &:active {
         outline: none;
+      }
+      @media screen and (max-width: 500px) {
+        font-size: 1.2em;
+        padding: 0.1rem 0.3rem;
       }
     }
   }
