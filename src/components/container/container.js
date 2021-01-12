@@ -32,32 +32,32 @@ const [inputData, setData] = useState({
       extrapay: '',
       timeLeft: 0,
       futureBalance: ''
+
 })
 const {balance, payment, interest, extrapay} = inputData;
 
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    const formattedVal = value.length > 3? parseFloat(value).toLocaleString('en'): value;
+    let { name, value } = e.target;
+    let formattedVal = value;
+    if(value.length > 3) {
+      while(value.includes(',')) {
+        let index = value.indexOf(',');
+        value = value.slice(0, index) + value.slice(index + 1)
+        // value.replace(/[,]/g, '');
+      }
+      formattedVal = parseFloat(value).toLocaleString('en');
+    }
     setData({ ...inputData, [name]: formattedVal });
 
   }
-
-  // let paymentNum = parseFloat(payment);
-  //   let totalPay = paymentNum + parseFloat(extrapay);
-  //   let balanceNum = parseFloat(balance);
-  //   let interestNum = parseFloat(interest) * 0.01/12;
-    // const time = useMemo(() => calcTime(balanceNum, interestNum, totalPay), [balanceNum, interestNum, totalPay]);
-
-    // const futureBal = useMemo(() => calcFutureBalance(balanceNum, paymentNum, interestNum, time), [balanceNum, paymentNum, interestNum, time]) ;
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const paymentNum = formStringToNum(payment);
     const totalPay = paymentNum + formStringToNum(extrapay);
     const balanceNum = formStringToNum(balance);
+    console.log("BN", balanceNum)
     const interestNum = formStringToNum(interest) * 0.01/12;
     const time = calcTime(balanceNum, interestNum, totalPay);
 
@@ -70,6 +70,7 @@ const {balance, payment, interest, extrapay} = inputData;
   }
 
     return (
+
       <div>
       <StyledHeader >
         Mortgage/loan overpayment comparison with Life Insurance with Cash Value
@@ -78,6 +79,8 @@ const {balance, payment, interest, extrapay} = inputData;
        <LoanField1 inputData={inputData} handleChange={handleChange} handleSubmit={handleSubmit}/>
     <LoanField2 inputData={inputData}/>
      </StyledMain>
+
+
       </div>
     )
   }

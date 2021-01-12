@@ -24,8 +24,19 @@ const LoanField2 = (props) =>  {
   const roundedYears = Math.round(timeLeft/12);
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    const formattedVal = value.length > 3? parseFloat(value).toLocaleString('en'): value;
+    let {name, value} = e.target;
+    let formattedVal = value;
+    if(value.length > 3) {
+
+      while(value.includes(',')) {
+        let index = value.indexOf(',');
+        value = value.slice(0, index) + value.slice(index + 1)
+        // value.replace(/[,]/g, '');
+      }
+
+      formattedVal = parseFloat(value).toLocaleString('en');
+    }
+
     setInputData2({...inputData2, [name] : formattedVal})
 
   }
@@ -59,8 +70,8 @@ const LoanField2 = (props) =>  {
        </form>
        <div className="form-text">
        {afterTaxAmount? <div>
-       <p>With Lump Summ withdrawal the amount after tax is equal to ${afterTaxAmount}. The difference with the target amount is {diffAmount}. </p>
-       <p>Run the illustration for continuation of monthly payments from Cash Value.</p>
+       <p>With Lump Sum withdrawal the amount after tax is equal to ${afterTaxAmount}. The difference with the target amount is {diffAmount}. </p>
+       <p>As alternative run the illustration for continuation of monthly payments from Cash Value.</p>
        </div> : null }
        </div>
        </div>
