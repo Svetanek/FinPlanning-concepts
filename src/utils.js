@@ -14,8 +14,6 @@ export const calcFutureBalance = (balance, payment, interest, timeLeft) => {
   let futBal = balance * coeff - payment / interest * (coeff - 1);
   // let roundedFutBalance = Math.round(futBal * 100) /100;
   let roundedFutBalance = Math.round(futBal);
-  console.log('ROUNDED=', roundedFutBalance)
-
   let futBalString = roundedFutBalance.toLocaleString('en');
 
 
@@ -27,3 +25,5 @@ export const formatStr = (str) => parseFloat(str).toLocaleString('en');
 
 
 export const formStringToNum = (str) => parseFloat(str.replace(/,/g, ''))
+
+

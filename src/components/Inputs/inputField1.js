@@ -4,9 +4,9 @@ import './inputFields.styles.scss'
 
 
 
-const LoanField1 = ({handleChange, handleSubmit, inputData}) => {
+const LoanField1 = ({handleChange, handleSubmit, inputData, error}) => {
 
-  const {balance, payment, interest, extrapay, timeLeft, futureBalance} = inputData;
+  const {balance, payment, interest, additional_payment, timeLeft, futureBalance} = inputData;
     const futBal = futureBalance? futureBalance : null;
     let years = Math.floor(timeLeft/12);
     let months = Math.round(timeLeft - (years * 12));
@@ -20,12 +20,13 @@ const LoanField1 = ({handleChange, handleSubmit, inputData}) => {
          <FormInput name="balance" value={balance} onChange={handleChange} currency required>Enter Current Balance</FormInput>
          <FormInput name="interest" value={interest} onChange={handleChange} required>Enter Interest % </FormInput>
          <FormInput name="payment" value={payment} onChange={handleChange} currency required>Enter Payment</FormInput>
-         <FormInput name="extrapay" value={extrapay} onChange={handleChange} currency required>Enter Additional Payment</FormInput>
+         <FormInput name="additional_payment" value={additional_payment} onChange={handleChange} currency required>Enter Additional Payment</FormInput>
          <button type="submit" >Calculate time to pay off the balance</button>
        </fieldset>
        </form>
        <div className='form-text'>
        {futBal? <div><p>Remaining time to pay off is {years} years and {months} months.</p><p>The Future Balance at that time with the current payments without extra payment is ${futBal}.</p> </div> : null}
+       {error? <div id='error' >{`* ${error}`}</div>: null}
        </div>
       </div>
    )

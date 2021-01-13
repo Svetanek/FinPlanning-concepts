@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import FormInput from '../form-input/form-input.js'
 import {formStringToNum} from '../../utils'
 import './inputFields.styles.scss'
+// import {StyledError} from '../../components/container/container'
 
 
 
@@ -19,15 +20,21 @@ const LoanField2 = (props) =>  {
       diffAmount: ''
       }
   )
+  const [error, setError] = useState('')
   const {premium, targetYear, targetBalance, projectedBalance, baseValue, tax, afterTaxAmount, diffAmount} = inputData2;
-  const {extrapay, timeLeft, futureBalance } = props.inputData;
+  const {additional_payment, timeLeft, futureBalance } = props.inputData;
   const roundedYears = Math.round(timeLeft/12);
 
   const handleChange = (e) => {
     let {name, value} = e.target;
     let formattedVal = value;
-    if(value.length > 3) {
+    let message = '';
+    if(isNaN(parseFloat(value))) {
+      message = `please input only numerical amount in the field: ${name}`
+    }
+    setError(message)
 
+    if(value.length > 3) {
       while(value.includes(',')) {
         let index = value.indexOf(',');
         value = value.slice(0, index) + value.slice(index + 1)
@@ -59,7 +66,7 @@ const LoanField2 = (props) =>  {
       <form onSubmit={handleSubmit} className="form">
        <fieldset className="form-fieldset">
          <legend className="form-legend">Input LI Details</legend>
-         <FormInput name="premium" value={extrapay? extrapay : premium} onChange={handleChange} currency >Premium</FormInput>
+         <FormInput name="premium" value={additional_payment? additional_payment : premium} onChange={handleChange} currency >Premium</FormInput>
          <FormInput name="targetYear" value={roundedYears? roundedYears : targetYear} onChange={handleChange}>Target Year</FormInput>
          <FormInput name="targetBalance" value={futureBalance? futureBalance: targetBalance} onChange={handleChange} currency required>Target Balance</FormInput>
          <FormInput name="projectedBalance" value={projectedBalance} onChange={handleChange} currency required >Input Projected Balance in {roundedYears}th year</FormInput>
@@ -73,6 +80,7 @@ const LoanField2 = (props) =>  {
        <p>With Lump Sum withdrawal the amount after tax is equal to ${afterTaxAmount}. The difference with the target amount is {diffAmount}. </p>
        <p>As alternative run the illustration for continuation of monthly payments from Cash Value.</p>
        </div> : null }
+       {error? <div id='error' >{`* ${error}`}</div >: null}
        </div>
        </div>
 
