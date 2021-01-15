@@ -14,7 +14,7 @@
 
   .form {
     height: 20rem;
-    width: 80%;
+    width: 28.5rem;
 
     @media screen and (max-width: 1200px) {
       width: 100%;
@@ -51,15 +51,15 @@
     }
   }
   .form-text {
-    margin: 3rem 0;
-    width: 30rem;
+    height: 7.5rem;
+    width: 28.5rem;
     @media screen and (max-width: 1200px) {
       width: 100%;
     }
   }
-  .error {
+  #error {
     color: #dd0821;
-    padding-left: 1.5rem;
+    // padding-left: 1.5rem;
     font-weight: 600;
     @media screen and (max-width: 900px) {
       padding: 0.3rem;

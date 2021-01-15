@@ -15,8 +15,6 @@ export const calcFutureBalance = (balance, payment, interest, timeLeft) => {
   // let roundedFutBalance = Math.round(futBal * 100) /100;
   let roundedFutBalance = Math.round(futBal);
   let futBalString = roundedFutBalance.toLocaleString('en');
-
-
   return futBalString;
 }
    //ALTERNATIVE
@@ -26,4 +24,10 @@ export const formatStr = (str) => parseFloat(str).toLocaleString('en');
 
 export const formStringToNum = (str) => parseFloat(str.replace(/,/g, ''))
 
-
+export const validate = (name, value, lastInput) => {
+  let message = ''
+  if(value && isNaN(parseInt(lastInput)) && lastInput !== ".") {
+    message = `please input only numerical value for ${name} field`;
+  }
+  return message;
+}

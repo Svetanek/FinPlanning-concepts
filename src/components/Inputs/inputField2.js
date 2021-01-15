@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import FormInput from '../form-input/form-input.js'
 import {formStringToNum} from '../../utils'
 import './inputFields.styles.scss'
-// import {StyledError} from '../../components/container/container'
 
 
 
@@ -30,7 +29,7 @@ const LoanField2 = (props) =>  {
     let formattedVal = value;
     let message = '';
     if(isNaN(parseFloat(value))) {
-      message = `please input only numerical amount in the field: ${name}`
+      message = `please input only numerical value for ${name}`
     }
     setError(message)
 

@@ -26,7 +26,7 @@ const LoanField1 = ({handleChange, handleSubmit, inputData, error}) => {
        </form>
        <div className='form-text'>
        {futBal? <div><p>Remaining time to pay off is {years} years and {months} months.</p><p>The Future Balance at that time with the current payments without extra payment is ${futBal}.</p> </div> : null}
-       {error? <div id='error' >{`* ${error}`}</div>: null}
+       {error? <p id='error' >* {error}</p>: null}
        </div>
       </div>
    )

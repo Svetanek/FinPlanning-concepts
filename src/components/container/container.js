@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState} from 'react'
 import LoanField1 from '../Inputs/inputField1';
 import LoanField2 from '../Inputs/inputField2';
-import {calcTime, calcFutureBalance, formStringToNum} from '../../utils';
+import {calcTime, calcFutureBalance, formStringToNum, validate} from '../../utils';
 import styled from 'styled-components';
 const StyledMain = styled.div`
 display: flex;
@@ -23,14 +23,6 @@ color: #044a4f;
   padding: 0.3rem;
 }
 `
-// export const StyledError = styled.p`
-// color: #dd0821;
-// padding-left: 1.5rem;
-// font-weight: 600;
-// @media screen and (max-width: 900px) {
-//   padding: 0.3rem;
-// }
-// `
 const Container = () => {
 const [inputData, setData] = useState({
       loan: '',
@@ -49,12 +41,9 @@ const {balance, payment, interest, additional_payment} = inputData;
   const handleChange = (e) => {
     let { name, value } = e.target;
     let formattedVal = value;
-    let message = '';
-    if(isNaN(parseFloat(value))) {
-      message = `please input only numerical amount in the field: ${name}`
-    }
-
-    setError(message)
+    let lastInput = value[value.length - 1];
+    let message = validate(name, value, lastInput)
+    setError(message);
 
     if(value.length > 3) {
       while(value.includes(',')) {
@@ -65,6 +54,7 @@ const {balance, payment, interest, additional_payment} = inputData;
       formattedVal = parseFloat(value).toLocaleString('en');
     }
     setData({ ...inputData, [name]: formattedVal });
+    console.log("Error=", error)
   }
 
   const handleSubmit = async (e) => {
@@ -75,10 +65,7 @@ const {balance, payment, interest, additional_payment} = inputData;
     const balanceNum = formStringToNum(balance);
     const interestNum = formStringToNum(interest) * 0.01/12;
     const time = calcTime(balanceNum, interestNum, totalPay);
-    let futureBal = 0;
-      futureBal =  calcFutureBalance(balanceNum, paymentNum, interestNum, time);
-
-    // const futureBal =  calcFutureBalance(balanceNum, paymentNum, interestNum, time);
+    const futureBal =  calcFutureBalance(balanceNum, paymentNum, interestNum, time);
     await setData({...inputData,
       timeLeft: time,
       futureBalance: futureBal}
