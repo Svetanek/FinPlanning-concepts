@@ -54,7 +54,7 @@ const {balance, payment, interest, additional_payment} = inputData;
       formattedVal = parseFloat(value).toLocaleString('en');
     }
     setData({ ...inputData, [name]: formattedVal });
-    console.log("Error=", error)
+
   }
 
   const handleSubmit = async (e) => {
@@ -72,13 +72,26 @@ const {balance, payment, interest, additional_payment} = inputData;
     );
   }
 
+  const clearData = () => {
+    setData({
+      loan: '',
+      balance: '',
+      payment: '',
+      interest: '',
+      additional_payment: '',
+      timeLeft: 0,
+      futureBalance: '',
+
+})
+  }
+
     return (
       <div>
       <StyledHeader >
         Mortgage/loan overpayment comparison with Life Insurance with Cash Value
       </StyledHeader>
      <StyledMain>
-       <LoanField1 inputData={inputData} error={error} handleChange={handleChange} handleSubmit={handleSubmit}/>
+       <LoanField1 inputData={inputData} error={error} handleChange={handleChange} handleSubmit={handleSubmit} clearData={clearData}/>
     <LoanField2 inputData={inputData}/>
      </StyledMain>
       </div>

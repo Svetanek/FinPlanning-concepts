@@ -7,6 +7,8 @@ import './inputFields.styles.scss'
 
 const LoanField2 = (props) =>  {
 
+  const {additional_payment, timeLeft, futureBalance } = props.inputData;
+
   const [inputData2, setInputData2] = useState(
     {
       premium: '',
@@ -19,9 +21,10 @@ const LoanField2 = (props) =>  {
       diffAmount: ''
       }
   )
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
+
   const {premium, targetYear, targetBalance, projectedBalance, baseValue, tax, afterTaxAmount, diffAmount} = inputData2;
-  const {additional_payment, timeLeft, futureBalance } = props.inputData;
+
   const roundedYears = Math.round(timeLeft/12);
 
   const handleChange = (e) => {
@@ -60,6 +63,19 @@ const LoanField2 = (props) =>  {
     setInputData2({...inputData2, afterTaxAmount: afterTax.toLocaleString('en'), diffAmount: diff.toLocaleString('en')})
   }
 
+  const clearData = () => {
+    setInputData2({
+      premium: '',
+      targetYear: '',
+      targetBalance: '',
+      projectedBalance: '',
+      baseValue: '',
+      tax: '',
+      afterTaxAmount: '',
+      diffAmount: ''
+      })
+  }
+
     return (
       <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
@@ -71,7 +87,10 @@ const LoanField2 = (props) =>  {
          <FormInput name="projectedBalance" value={projectedBalance} onChange={handleChange} currency required >Input Projected Balance in {roundedYears}th year</FormInput>
          <FormInput name="baseValue" value={baseValue} onChange={handleChange} currency required >Input Base Value</FormInput>
          <FormInput name="tax" value={tax} onChange={handleChange} >Input Tax %</FormInput>
+         <div id="buttons">
          <button type="submit" >Calculate</button>
+         <button onClick={clearData}>Reset</button>
+         </div>
        </fieldset>
        </form>
        <div className="form-text">
