@@ -86,7 +86,7 @@ const LoanField2 = (props) =>  {
          <FormInput name="targetBalance" value={futureBalance? futureBalance: targetBalance} onChange={handleChange} currency required>Target Balance</FormInput>
          <FormInput name="projectedBalance" value={projectedBalance} onChange={handleChange} currency required >Input Projected Balance in {roundedYears}th year</FormInput>
          <FormInput name="baseValue" value={baseValue} onChange={handleChange} currency required >Input Base Value</FormInput>
-         <FormInput name="tax" value={tax} onChange={handleChange} >Input Tax %</FormInput>
+         <FormInput name="tax" value={tax} onChange={handleChange} percent >Input Tax</FormInput>
          <div id="buttons">
          <button type="submit" >Calculate</button>
          <button onClick={clearData}>Reset</button>

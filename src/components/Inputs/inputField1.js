@@ -18,7 +18,7 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, error}) =
        <fieldset className="form-fieldset">
          <legend className="form-legend">Input Loan Details</legend>
          <FormInput name="balance" value={balance} onChange={handleChange} currency required>Input Current Balance</FormInput>
-         <FormInput name="interest" value={interest} onChange={handleChange} required>Input Interest % </FormInput>
+         <FormInput name="interest" value={interest} onChange={handleChange} percent required>Input Interest </FormInput>
          <FormInput name="payment" value={payment} onChange={handleChange} currency required>Input Payment</FormInput>
          <FormInput name="additional_payment" value={additional_payment} onChange={handleChange} currency required>Input Additional Payment</FormInput>
          <div id="buttons">
