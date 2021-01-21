@@ -64,6 +64,7 @@ const {balance, payment, interest, additional_payment} = inputData;
     const interestNum = formStringToNum(interest) * 0.01/12;
     const time = calcTime(balanceNum, interestNum, totalPay);
     const futureBal =  calcFutureBalance(balanceNum, paymentNum, interestNum, time);
+    console.log('time=', time, 'FUTURE', futureBal);
     await setData({...inputData,
       timeLeft: time,
       futureBalance: futureBal}

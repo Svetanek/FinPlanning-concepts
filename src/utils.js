@@ -1,11 +1,8 @@
 export const calcTime =  (balance, interest, payment) => {
-
-  // if (Number.isNaN(balance) ) {
-  //   return '';
   let denominator = Math.log(1 + interest);
   let inner = 1 - (balance * interest/payment);
   let numerator = Math.log(1/inner);
-  const time = numerator/denominator;
+  const time = Math.round(numerator/denominator);
   return time;
 }
 

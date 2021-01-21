@@ -9,7 +9,7 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, error}) =
   const {balance, payment, interest, additional_payment, timeLeft, futureBalance} = inputData;
     const futBal = futureBalance? futureBalance : null;
     let years = Math.floor(timeLeft/12);
-    let months = Math.round(timeLeft - (years * 12));
+    let months = timeLeft - (years * 12);
 
 
     return (
