@@ -31,3 +31,12 @@ export const validate = (name, value, lastInput) => {
   }
   return message;
 }
+
+export const deleteSeparator = (value) => {
+      while(value.includes(',')) {
+        let index = value.indexOf(',');
+        value = value.slice(0, index) + value.slice(index + 1)
+        // value.replace(/[,]/g, '');
+      }
+return value;
+}

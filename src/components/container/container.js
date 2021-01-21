@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import LoanField1 from '../Inputs/inputField1';
 import LoanField2 from '../Inputs/inputField2';
-import {calcTime, calcFutureBalance, formStringToNum, validate} from '../../utils';
+import {calcTime, calcFutureBalance, formStringToNum, validate, deleteSeparator} from '../../utils';
 import styled from 'styled-components';
 const StyledMain = styled.div`
 display: flex;
@@ -46,10 +46,8 @@ const {balance, payment, interest, additional_payment} = inputData;
     setError(message);
 
     if(value.length > 3) {
-      while(value.includes(',')) {
-        let index = value.indexOf(',');
-        value = value.slice(0, index) + value.slice(index + 1)
-        // value.replace(/[,]/g, '');
+      if(value.includes(',')) {
+      value = deleteSeparator(value);
       }
       formattedVal = parseFloat(value).toLocaleString('en');
     }

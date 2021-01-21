@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import FormInput from '../form-input/form-input.js'
-import {formStringToNum} from '../../utils'
+import {formStringToNum, validate, deleteSeparator} from '../../utils'
 import './inputFields.styles.scss'
 
 
@@ -30,19 +30,14 @@ const LoanField2 = (props) =>  {
   const handleChange = (e) => {
     let {name, value} = e.target;
     let formattedVal = value;
-    let message = '';
-    if(isNaN(parseFloat(value))) {
-      message = `please input only numerical value for ${name}`
-    }
-    setError(message)
+    let lastInput = value[value.length - 1];
+    let message = validate(name, value, lastInput)
+    setError(message);
 
     if(value.length > 3) {
-      while(value.includes(',')) {
-        let index = value.indexOf(',');
-        value = value.slice(0, index) + value.slice(index + 1)
-        // value.replace(/[,]/g, '');
+      if(value.includes(',')) {
+      value = deleteSeparator(value);
       }
-
       formattedVal = parseFloat(value).toLocaleString('en');
     }
 
@@ -81,7 +76,7 @@ const LoanField2 = (props) =>  {
       <form onSubmit={handleSubmit} className="form">
        <fieldset className="form-fieldset">
          <legend className="form-legend">Input LI Details</legend>
-         <FormInput name="premium" value={additional_payment? additional_payment : premium} onChange={handleChange} currency >Premium</FormInput>
+         <FormInput name="premium" value={additional_payment? additional_payment : premium} onChange={handleChange} currency >Premium (monthly)</FormInput>
          <FormInput name="targetYear" value={roundedYears? roundedYears : targetYear} onChange={handleChange}>Target Year</FormInput>
          <FormInput name="targetBalance" value={futureBalance? futureBalance: targetBalance} onChange={handleChange} currency required>Target Balance</FormInput>
          <FormInput name="projectedBalance" value={projectedBalance} onChange={handleChange} currency required >Input Projected Balance in {roundedYears}th year</FormInput>
