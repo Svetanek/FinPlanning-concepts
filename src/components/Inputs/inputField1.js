@@ -22,7 +22,7 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, error}) =
          <FormInput name="payment" value={payment} onChange={handleChange} currency required>Input Monthly Payment</FormInput>
          <FormInput name="additional_payment" value={additional_payment} onChange={handleChange} currency required>Input Additional Payment</FormInput>
          <div id="buttons">
-         <button type="submit" >Calculate time to pay off the balance</button>
+         <button id="button-1" type="submit" >Calculate time to pay off the balance</button>
          <button onClick={clearData}>Reset</button>
          </div>
        </fieldset>

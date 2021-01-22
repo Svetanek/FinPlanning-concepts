@@ -25,7 +25,6 @@ color: #044a4f;
 `
 const Container = () => {
 const [inputData, setData] = useState({
-      loan: '',
       balance: '',
       payment: '',
       interest: '',
@@ -73,7 +72,6 @@ const {balance, payment, interest, additional_payment} = inputData;
 
   const clearData = () => {
     setData({
-      loan: '',
       balance: '',
       payment: '',
       interest: '',
