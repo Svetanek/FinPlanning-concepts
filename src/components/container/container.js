@@ -5,7 +5,7 @@ import {calcTime, calcFutureBalance, formStringToNum, validate, deleteSeparator,
 import styled from 'styled-components';
 const StyledHeader = styled.h2`
 text-align: center;
-padding-bottom: 1rem;
+padding-bottom: 0 0.5rem;
 color: #044a4f;
 @media screen and (max-width: 900px) {
   font-size: 1.3em;
