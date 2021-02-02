@@ -9,14 +9,17 @@ describe('rendering first loan fiels component', () => {
   let mockHChange = jest.fn();
   let mockHSubmit = jest.fn();
   let mockClear = jest.fn();
+  let mockEmpty = jest.fn();
   let mockError = '';
   let mockInput = {
       balance: '316000',
       payment: '1580',
       interest: '3.875',
       additional_payment: '500',
-      timeLeft: 0,
-      futureBalance: '',
+  }
+  let mockCalc = {
+    timeLeft: 0,
+    futureBalance: ''
   }
 
   let mockProps = {
@@ -24,7 +27,9 @@ describe('rendering first loan fiels component', () => {
     handleSubmit: mockHSubmit,
     clearData:  mockClear,
     inputData: mockInput,
-    error: mockError
+    calcData: mockCalc,
+    error: mockError,
+    isEmpty: mockEmpty
   }
    const wrapper = shallow(<LoanField1 {...mockProps}/>);
   it('renders loanField1 component', () => {
@@ -43,14 +48,18 @@ describe('rendering first loan fiels component', () => {
       payment: '',
       interest: '',
       additional_payment: '',
-      timeLeft: 0,
-      futureBalance: '',
   }
+  let newMockCalc = {
+    timeLeft: 0,
+    futureBalance: ''
+  }
+
   let newMockError = "error message"
   let newMockProps = {  handleChange: mockHChange,
     handleSubmit: mockHSubmit,
     clearData:  mockClear,
     inputData: newMockInput,
+    calcData: newMockCalc,
     error: newMockError}
   let newWrapper = shallow(<LoanField1 {...newMockProps} />)
     expect(newWrapper.find('#error').exists()).toBe(true);
