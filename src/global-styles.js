@@ -8,9 +8,9 @@ body {
 
   // background-color: #c1fce8;
   background-color: #83ced4;
-  padding: 20px;
+  padding: 1rem;
   @media screen and (max-width: 900px) {
-  padding: 12px;
+  padding: 0.625em;
   }
 }
 

@@ -1,8 +1,19 @@
 import React, { useState} from 'react'
 import LoanField1 from '../Inputs/inputField1';
 import LoanField2 from '../Inputs/inputField2';
-import {calcTime, calcFutureBalance, formStringToNum, validate, deleteSeparator} from '../../utils';
+import {calcTime, calcFutureBalance, formStringToNum, validate, deleteSeparator, isEmpty} from '../../utils';
 import styled from 'styled-components';
+const StyledHeader = styled.h2`
+text-align: center;
+padding-bottom: 1rem;
+color: #044a4f;
+@media screen and (max-width: 900px) {
+  font-size: 1.3em;
+  padding: 0.3rem;
+}
+`
+const StyledText = styled.div`
+padding: 0 1rem`
 const StyledMain = styled.div`
 display: flex;
 justify-content: space-between;
@@ -14,24 +25,17 @@ width: 100%;
   align-items: center;
 }
 `
-const StyledHeader = styled.h2`
-text-align: center;
-padding: 1rem;
-color: #044a4f;
-@media screen and (max-width: 900px) {
-  font-size: 1.3em;
-  padding: 0.3rem;
-}
-`
+
 const Container = () => {
 const [inputData, setData] = useState({
       balance: '',
       payment: '',
       interest: '',
-      additional_payment: '',
-      timeLeft: 0,
-      futureBalance: '',
-
+      additional_payment: ''
+})
+const[calcData, setCalcData] = useState({
+  timeLeft: 0,
+  futureBalance: ''
 })
 const [error, setError] = useState('')
 const {balance, payment, interest, additional_payment} = inputData;
@@ -51,7 +55,6 @@ const {balance, payment, interest, additional_payment} = inputData;
       formattedVal = parseFloat(value).toLocaleString('en');
     }
     setData({ ...inputData, [name]: formattedVal });
-
   }
 
   const handleSubmit = async (e) => {
@@ -63,8 +66,7 @@ const {balance, payment, interest, additional_payment} = inputData;
     const interestNum = formStringToNum(interest) * 0.01/12;
     const time = calcTime(balanceNum, interestNum, totalPay);
     const futureBal =  calcFutureBalance(balanceNum, paymentNum, interestNum, time);
-    console.log('time=', time, 'FUTURE', futureBal);
-    await setData({...inputData,
+    await setCalcData({...calcData,
       timeLeft: time,
       futureBalance: futureBal}
     );
@@ -75,27 +77,33 @@ const {balance, payment, interest, additional_payment} = inputData;
       balance: '',
       payment: '',
       interest: '',
-      additional_payment: '',
-      timeLeft: 0,
-      futureBalance: '',
-
+      additional_payment: ''
+})
+  setCalcData({
+  timeLeft: 0,
+  futureBalance: ''
 })
   }
 
     return (
       <div>
+
+
+
+
       <StyledHeader >
         Mortgage/loan overpayment comparison with Life Insurance with Cash Value
       </StyledHeader>
+      <StyledText>
+      <p>The calculator is devided in 2 parts. 1st - based on the current balance, which is easy to find in the last statement, you can calculate the time starting from today (not from original loan day) when the mortgage or loan can be paid off with the additional amount. Also it calculates the future balance at that time with the current payment schedule, without extra amount.</p>
+        <p>2nd part is to compare that future balance with the projected cash value at the year of potential payoff using the approach of maximizing CV with funding policy up to MEC limit. In case the LI cash value significanly higher than the target future balance, there are 2 options to consider: to pay off the whole balance (with the tax consideration). The additional benefit here is LI coverage during all those years. And the second option is to continue paying mortgage payments and having tax advantage for interest but the source of payments to be switched to cash value. The separate LI illustration has to be run for that option.</p>
+      </StyledText>
      <StyledMain>
-       <LoanField1 inputData={inputData} error={error} handleChange={handleChange} handleSubmit={handleSubmit} clearData={clearData}/>
-    <LoanField2 inputData={inputData}/>
+       <LoanField1 inputData={inputData} calcData={calcData} error={error} handleChange={handleChange} handleSubmit={handleSubmit} clearData={clearData} isEmpty={isEmpty(inputData)}/>
+    <LoanField2 payment={inputData.additional_payment} calcData={calcData}/>
      </StyledMain>
       </div>
     )
   }
-
-
-
 
 export default Container;

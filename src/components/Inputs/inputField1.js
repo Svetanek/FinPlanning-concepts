@@ -4,12 +4,14 @@ import './inputFields.styles.scss'
 
 
 
-const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, error}) => {
+const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData, error, isEmpty}) => {
 
-  const {balance, payment, interest, additional_payment, timeLeft, futureBalance} = inputData;
+  const {balance, payment, interest, additional_payment} = inputData;
+  const { timeLeft, futureBalance} = calcData;
     const futBal = futureBalance? futureBalance : null;
     let years = Math.floor(timeLeft/12);
     let months = timeLeft - (years * 12);
+
 
 
     return (
@@ -22,8 +24,8 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, error}) =
          <FormInput name="payment" value={payment} onChange={handleChange} currency required>Input Monthly Payment</FormInput>
          <FormInput name="additional_payment" value={additional_payment} onChange={handleChange} currency required>Input Additional Payment</FormInput>
          <div id="buttons">
-         <button id="button-1" type="submit" >Calculate time to pay off the balance</button>
          <button onClick={clearData}>Reset</button>
+         <button id="button-1" type="submit" disabled={isEmpty || error} >Calculate time to pay off the balance</button>
          </div>
        </fieldset>
        </form>

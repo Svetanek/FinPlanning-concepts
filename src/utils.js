@@ -37,3 +37,10 @@ export const deleteSeparator = (value) => {
       }
 return value;
 }
+
+export const isEmpty = (input) => {
+  const empty = Object.values(input).includes('');
+
+ return empty
+
+}

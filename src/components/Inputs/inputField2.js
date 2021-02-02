@@ -7,7 +7,8 @@ import './inputFields.styles.scss'
 
 const LoanField2 = (props) =>  {
 
-  const {additional_payment, timeLeft, futureBalance } = props.inputData;
+  const additional_payment = props.payment;
+  const {timeLeft, futureBalance } = props.calcData
 
   const [inputData2, setInputData2] = useState(
     {
@@ -16,14 +17,16 @@ const LoanField2 = (props) =>  {
       targetBalance: '',
       projectedBalance: '',
       baseValue: '',
-      tax: '',
-      afterTaxAmount: '',
-      diffAmount: ''
-      }
-  )
+      tax: ''
+    })
+  const [calcData2, setCalcData2] = useState({
+    afterTaxAmount: '',
+    diffAmount: ''
+  })
   const [error, setError] = useState('');
 
-  const {premium, targetYear, targetBalance, projectedBalance, baseValue, tax, afterTaxAmount, diffAmount} = inputData2;
+  const {premium, targetYear, targetBalance, projectedBalance, baseValue, tax} = inputData2;
+  const {afterTaxAmount, diffAmount} = calcData2;
 
   const roundedYears = Math.round(timeLeft/12);
 
@@ -42,8 +45,8 @@ const LoanField2 = (props) =>  {
     }
 
     setInputData2({...inputData2, [name] : formattedVal})
-
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const projBalNum = formStringToNum(projectedBalance);
@@ -55,7 +58,7 @@ const LoanField2 = (props) =>  {
     let taxAmount = (projBalNum - baseValNum) * tax * 0.01;
     let afterTax = projBalNum - taxAmount;
     let diff = (afterTax - futBal);
-    setInputData2({...inputData2, afterTaxAmount: afterTax.toLocaleString('en'), diffAmount: diff.toLocaleString('en')})
+    setCalcData2({...calcData2, afterTaxAmount: afterTax.toLocaleString('en'), diffAmount: diff.toLocaleString('en')})
   }
 
   const clearData = () => {
@@ -66,9 +69,16 @@ const LoanField2 = (props) =>  {
       projectedBalance: '',
       baseValue: '',
       tax: '',
-      afterTaxAmount: '',
-      diffAmount: ''
+
       })
+      setCalcData2({
+        afterTaxAmount: '',
+        diffAmount: ''
+      })
+  }
+  const isEmpty2 = (input) => {
+    const manualInputFields = Object.values(input).slice(-3);
+    return manualInputFields.includes('');
   }
 
     return (
@@ -83,8 +93,9 @@ const LoanField2 = (props) =>  {
          <FormInput name="baseValue" value={baseValue} onChange={handleChange} currency required >Input Base Value</FormInput>
          <FormInput name="tax" value={tax} onChange={handleChange} percent >Input Tax</FormInput>
          <div id="buttons">
-         <button type="submit" >Calculate</button>
          <button onClick={clearData}>Reset</button>
+         <button type="submit" disabled={isEmpty2(inputData2) || error} >Calculate</button>
+
          </div>
        </fieldset>
        </form>
