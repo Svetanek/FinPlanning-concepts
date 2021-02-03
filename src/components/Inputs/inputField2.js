@@ -33,9 +33,8 @@ const LoanField2 = (props) =>  {
   const handleChange = (e) => {
     let {name, value} = e.target;
     let formattedVal = value;
-    let lastInput = value[value.length - 1];
-    let message = validate(name, value, lastInput)
-    setError(message);
+    // let lastInput = value[value.length - 1];
+
 
     if(value.length > 3) {
       if(value.includes(',')) {
@@ -43,6 +42,14 @@ const LoanField2 = (props) =>  {
       }
       formattedVal = parseFloat(value).toLocaleString('en');
     }
+
+    let message = validate(name, value, value[value.length - 1]);
+    let numProjBal = deleteSeparator(projectedBalance);
+    if(name === 'baseValue' && parseFloat(value) > numProjBal) {
+      message = 'Please check your input. The base value can not be more than the target value.'
+    }
+    setError(message);
+
 
     setInputData2({...inputData2, [name] : formattedVal})
   }
@@ -100,7 +107,7 @@ const LoanField2 = (props) =>  {
        </fieldset>
        </form>
        <div className="form-text">
-       {afterTaxAmount? <div>
+       {(afterTaxAmount && !error)? <div>
        <p>With Lump Sum withdrawal the amount after tax is equal to ${afterTaxAmount}. The difference with the target amount is {diffAmount}. </p>
        <p>As alternative run the illustration for continuation of monthly payments from Cash Value.</p>
        </div> : null }

@@ -47,6 +47,7 @@ const {balance, payment, interest, additional_payment} = inputData;
     let lastInput = value[value.length - 1];
     let message = validate(name, value, lastInput)
     setError(message);
+    if(message) formattedVal = '';
 
     if(value.length > 3) {
       if(value.includes(',')) {
@@ -70,6 +71,11 @@ const {balance, payment, interest, additional_payment} = inputData;
       timeLeft: time,
       futureBalance: futureBal}
     );
+    let message = '';
+    if(!time || !futureBal) {
+      message  = 'check your input'
+    }
+    setError(message);
   }
 
   const clearData = () => {

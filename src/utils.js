@@ -21,10 +21,20 @@ export const formatStr = (str) => parseFloat(str).toLocaleString('en');
 
 export const formStringToNum = (str) => parseFloat(str.replace(/,/g, ''))
 
+// export const validate = (name, value, lastInput) => {
+//   let message = ''
+//   if(value && isNaN(parseInt(lastInput)) && lastInput !== ".") {
+//     message = `please input only numerical value for ${name} field`;
+
+//   }
+//   return message;
+// }
+
 export const validate = (name, value, lastInput) => {
   let message = ''
   if(value && isNaN(parseInt(lastInput)) && lastInput !== ".") {
     message = `please input only numerical value for ${name} field`;
+
   }
   return message;
 }

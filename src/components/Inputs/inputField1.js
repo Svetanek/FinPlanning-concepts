@@ -9,8 +9,8 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData,
   const {balance, payment, interest, additional_payment} = inputData;
   const { timeLeft, futureBalance} = calcData;
     const futBal = futureBalance? futureBalance : null;
-    let years = Math.floor(timeLeft/12);
-    let months = timeLeft - (years * 12);
+    const years = Math.floor(timeLeft/12);
+    const months = timeLeft - (years * 12);
 
 
 
@@ -30,7 +30,7 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData,
        </fieldset>
        </form>
        <div className='form-text'>
-       {futBal? <div><p>Remaining time to pay off is {years} years and {months} months.</p><p>The Future Balance at that time with the current payments without extra payment is ${futBal}.</p> </div> : null}
+       {(futBal && !error)? <div><p>Remaining time to pay off is {years} years and {months} months.</p><p>The Future Balance at that time with the current payments without extra payment is ${futBal}.</p> </div> : null}
        {error? <p id='error' >* {error}</p>: null}
        </div>
       </div>
