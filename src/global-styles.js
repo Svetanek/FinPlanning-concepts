@@ -8,8 +8,7 @@ body {
   font-family: 'Lora';
   font-weight: 400;
   font-size: 16px;
-
-
+  min-height: 100vh;
   background-image: linear-gradient(to bottom, #bce4e9, #77bcc5);;
   padding: 1rem;
   @media screen and (max-width: 900px) {
