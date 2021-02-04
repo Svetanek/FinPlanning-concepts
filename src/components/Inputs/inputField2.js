@@ -13,10 +13,10 @@ const LoanField2 = (props) =>  {
   const [inputData2, setInputData2] = useState(
     {
       premium: '',
-      targetYear: '',
-      targetBalance: '',
-      projectedBalance: '',
-      baseValue: '',
+      target_year: '',
+      target_balance: '',
+      projected_balance: '',
+      base_value: '',
       tax: ''
     })
   const [calcData2, setCalcData2] = useState({
@@ -25,7 +25,7 @@ const LoanField2 = (props) =>  {
   })
   const [error, setError] = useState('');
 
-  const {premium, targetYear, targetBalance, projectedBalance, baseValue, tax} = inputData2;
+  const {premium, target_year, target_balance, projected_balance, base_value, tax} = inputData2;
   const {afterTaxAmount, diffAmount} = calcData2;
 
   const roundedYears = Math.round(timeLeft/12);
@@ -44,25 +44,25 @@ const LoanField2 = (props) =>  {
     }
 
     let message = validate(name, value, value[value.length - 1]);
-    let numProjBal = deleteSeparator(projectedBalance);
-    if(name === 'baseValue' && parseFloat(value) > numProjBal) {
+    let numProjBal = deleteSeparator(projected_balance);
+    if(name === 'base_value' && parseFloat(value) > numProjBal) {
       message = 'Please check your input. The base value can not be more than the target value.'
     }
     setError(message);
-
+    if(message.includes('numerical')) formattedVal = formattedVal.slice(0, -1);
 
     setInputData2({...inputData2, [name] : formattedVal})
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const projBalNum = formStringToNum(projectedBalance);
-    const baseValNum = formStringToNum(baseValue);
+    const projBalNum = formStringToNum(projected_balance);
+    const baseValNum = formStringToNum(base_value);
     // const taxNum = formStringToNum(tax)
-    const futBal = formStringToNum(futureBalance);
+    const futBal = futureBalance? formStringToNum(futureBalance) : formStringToNum(target_balance);
 
 
-    let taxAmount = (projBalNum - baseValNum) * tax * 0.01;
+    let taxAmount = projBalNum > baseValNum? (projBalNum - baseValNum) * tax * 0.01: 0;
     let afterTax = projBalNum - taxAmount;
     let diff = (afterTax - futBal);
     setCalcData2({...calcData2, afterTaxAmount: afterTax.toLocaleString('en'), diffAmount: diff.toLocaleString('en')})
@@ -71,17 +71,18 @@ const LoanField2 = (props) =>  {
   const clearData = () => {
     setInputData2({
       premium: '',
-      targetYear: '',
-      targetBalance: '',
-      projectedBalance: '',
-      baseValue: '',
+      target_year: '',
+      target_balance: '',
+      projected_balance: '',
+      base_value: '',
       tax: '',
 
-      })
+      });
       setCalcData2({
         afterTaxAmount: '',
         diffAmount: ''
-      })
+      });
+      setError('');
   }
   const isEmpty2 = (input) => {
     const manualInputFields = Object.values(input).slice(-3);
@@ -94,10 +95,10 @@ const LoanField2 = (props) =>  {
        <fieldset className="form-fieldset">
          <legend className="form-legend">Input LI Details</legend>
          <FormInput name="premium" value={additional_payment? additional_payment : premium} onChange={handleChange} currency >Premium (monthly)</FormInput>
-         <FormInput name="targetYear" value={roundedYears? roundedYears : targetYear} onChange={handleChange}>Target Year</FormInput>
-         <FormInput name="targetBalance" value={futureBalance? futureBalance: targetBalance} onChange={handleChange} currency required>Target Balance</FormInput>
-         <FormInput name="projectedBalance" value={projectedBalance} onChange={handleChange} currency required >Input Projected Balance in {roundedYears}th year</FormInput>
-         <FormInput name="baseValue" value={baseValue} onChange={handleChange} currency required >Input Base Value</FormInput>
+         <FormInput name="target_year" value={roundedYears? roundedYears : target_year} onChange={handleChange}>Target Year</FormInput>
+         <FormInput name="target_balance" value={futureBalance? futureBalance: target_balance} onChange={handleChange} currency required>Target Balance</FormInput>
+         <FormInput name="projected_balance" value={projected_balance} onChange={handleChange} currency required >Input Projected Balance in {roundedYears}th year</FormInput>
+         <FormInput name="base_value" value={base_value} onChange={handleChange} currency required >Input Base Value</FormInput>
          <FormInput name="tax" value={tax} onChange={handleChange} percent >Input Tax</FormInput>
          <div id="buttons">
          <button onClick={clearData}>Reset</button>

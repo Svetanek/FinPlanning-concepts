@@ -13,7 +13,6 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData,
     const months = timeLeft - (years * 12);
 
 
-
     return (
       <div className="form-container">
         <form onSubmit={handleSubmit} className="form">
@@ -25,7 +24,7 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData,
          <FormInput name="additional_payment" value={additional_payment} onChange={handleChange} currency required>Input Additional Payment</FormInput>
          <div id="buttons">
          <button onClick={clearData}>Reset</button>
-         <button id="button-1" type="submit" disabled={isEmpty || error} >Calculate time to pay off the balance</button>
+         <button id="button-1" type="submit" disabled={isEmpty} >Calculate time to pay off the balance</button>
          </div>
        </fieldset>
        </form>

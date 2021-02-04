@@ -17,6 +17,7 @@
     height: 22rem;
     width: 32rem;
     margin: 0 auto;
+    // color: #bedadd
 
     @media screen and (max-width: 1200px) {
       width: 100%;
@@ -29,6 +30,7 @@
       position: relative;
       height: 100%;
       width: 100%;
+      border-radius: 10px;
     }
 
     &-legend {
@@ -46,10 +48,16 @@
     button {
       padding: 0.3rem 0.5rem;
       border-radius: 5px;
-      background-color: #0c8f99;
+      background-color: #1c949c;
+      box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.06);
       color: #ffffff;
-      &:active {
-        outline: none;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active,
+      &:focus {
+        outline: 0;
+        border-image: none;
       }
       &:disabled,
       &[disabled] {
@@ -72,6 +80,7 @@
   #error {
     color: #dd0821;
     font-weight: 600;
+    margin-top: 1rem;
     @media screen and (max-width: 900px) {
       padding: 0.3rem;
     }

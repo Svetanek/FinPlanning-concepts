@@ -47,7 +47,8 @@ const {balance, payment, interest, additional_payment} = inputData;
     let lastInput = value[value.length - 1];
     let message = validate(name, value, lastInput)
     setError(message);
-    if(message) formattedVal = '';
+    if(message) formattedVal = formattedVal.slice(0, -1);
+
 
     if(value.length > 3) {
       if(value.includes(',')) {
@@ -85,18 +86,16 @@ const {balance, payment, interest, additional_payment} = inputData;
       interest: '',
       additional_payment: ''
 })
-  setCalcData({
-  timeLeft: 0,
-  futureBalance: ''
+     setCalcData({
+     timeLeft: 0,
+     futureBalance: ''
 })
+     setError('')
+
   }
 
     return (
       <div>
-
-
-
-
       <StyledHeader >
         Mortgage/loan overpayment comparison with Life Insurance with Cash Value
       </StyledHeader>
