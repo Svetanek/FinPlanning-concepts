@@ -31,6 +31,7 @@ export const validate = (name, value, lastInput) => {
   return message;
 }
 
+
 export const deleteSeparator = (value) => {
       while(value.includes(',')) {
         let index = value.indexOf(',');
