@@ -107,7 +107,7 @@ const {balance, payment, interest, additional_payment} = inputData;
        <LoanField1 inputData={inputData} calcData={calcData} error={error} handleChange={handleChange} handleSubmit={handleSubmit} clearData={clearData} isEmpty={isEmpty(inputData)}/>
     <LoanField2 payment={inputData.additional_payment} calcData={calcData}/>
      </StyledMain>
-      <div>&copy; 2020 by Svetlana Shinkar. All right reserved.</div>
+      <div>&copy; 2020 by Svetlana Shinkar. All rights reserved.</div>
       </div>
     )
   }
