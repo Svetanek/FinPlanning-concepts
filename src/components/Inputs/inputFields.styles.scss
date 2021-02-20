@@ -16,7 +16,7 @@
     width: 100%;
   }
   @media screen and (max-width: 500px) {
-    padding: 0;
+    padding: 0 0 1.5rem 0;
   }
 
   .form {
@@ -120,6 +120,18 @@
       width: 100%;
     }
   }
+  #button-1 {
+    @media screen and (max-width: 440px) {
+      padding: 0.2 0.4rem;
+      font-size: 14px;
+    }
+  }
+  #button-2 {
+    @media screen and (max-width: 700px) {
+      width: 6rem;
+    }
+  }
+
   #error {
     color: #dd0821;
     font-weight: 600;

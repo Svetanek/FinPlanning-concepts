@@ -102,7 +102,7 @@ const LoanField2 = (props) =>  {
          <FormInput name="tax" value={tax} onChange={handleChange} percent >Input Tax</FormInput>
          <div id="buttons">
          <button onClick={clearData}>Reset</button>
-         <button type="submit" disabled={isEmpty2(inputData2) || error} >Calculate</button>
+         <button id="button-2" type="submit" disabled={isEmpty2(inputData2) || error} >Calculate</button>
 
          </div>
        </fieldset>
