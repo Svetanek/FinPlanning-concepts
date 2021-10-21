@@ -4,7 +4,7 @@ import './inputFields.styles.scss'
 
 
 
-const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData, error, isEmpty}) => {
+const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData, error, isEmpty}, ref) => {
 
   const {balance, payment, interest, additional_payment} = inputData;
   const { timeLeft, futureBalance} = calcData;
@@ -13,12 +13,13 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData,
     const months = timeLeft - (years * 12);
 
 
+
     return (
       <div className="form-container">
         <form onSubmit={handleSubmit} className="form">
        <fieldset className="form-fieldset">
          <legend className="form-legend">Input Loan Details</legend>
-         <FormInput name="balance" value={balance} onChange={handleChange} currency required>Input Current Balance</FormInput>
+         <FormInput  name="balance" value={balance} onChange={handleChange} currency required ref={ref}>Input Current Balance</FormInput>
          <FormInput name="interest" value={interest} onChange={handleChange} percent required>Input Interest (annual) </FormInput>
          <FormInput name="payment" value={payment} onChange={handleChange} currency required>Input Monthly Payment</FormInput>
          <FormInput name="additional_payment" value={additional_payment} onChange={handleChange} currency required>Input Additional Payment</FormInput>
@@ -39,4 +40,4 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData,
 
 
 
-export default LoanField1
+export default React.forwardRef(LoanField1)

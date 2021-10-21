@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useRef, useEffect} from 'react'
 import LoanField1 from '../Inputs/inputField1';
 import LoanField2 from '../Inputs/inputField2';
 import {calcTime, calcFutureBalance, formStringToNum, validate, deleteSeparator, isEmpty} from '../../utils';
@@ -39,7 +39,10 @@ const[calcData, setCalcData] = useState({
 })
 const [error, setError] = useState('')
 const {balance, payment, interest, additional_payment} = inputData;
-
+const inputRef = useRef();
+useEffect(() => {
+  inputRef.current.focus();
+}, [])
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -104,7 +107,7 @@ const {balance, payment, interest, additional_payment} = inputData;
         <p>2nd part is to compare that future balance with the projected cash value at the year of potential payoff using the approach of maximizing CV with funding policy up to MEC limit. In case the LI cash value significanly higher than the target future balance, there are 2 options to consider: to pay off the whole balance (with the tax consideration). The additional benefit here is LI coverage during all those years. And the second option is to continue paying mortgage payments and having tax advantage for interest but the source of payments to be switched to cash value. The separate LI illustration has to be run for that option.</p>
       </StyledText>
      <StyledMain>
-       <LoanField1 inputData={inputData} calcData={calcData} error={error} handleChange={handleChange} handleSubmit={handleSubmit} clearData={clearData} isEmpty={isEmpty(inputData)}/>
+       <LoanField1 ref={inputRef} inputData={inputData} calcData={calcData} error={error} handleChange={handleChange} handleSubmit={handleSubmit} clearData={clearData} isEmpty={isEmpty(inputData)} />
     <LoanField2 payment={inputData.additional_payment} calcData={calcData}/>
      </StyledMain>
       <div>&copy; 2020 by Svetlana Shinkar. All rights reserved.</div>

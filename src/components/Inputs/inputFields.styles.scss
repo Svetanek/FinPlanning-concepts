@@ -97,7 +97,7 @@
         cursor: pointer;
       }
 
-      @include clearBorder;
+      // @include clearBorder;
 
       &:active {
         box-shadow: none;
