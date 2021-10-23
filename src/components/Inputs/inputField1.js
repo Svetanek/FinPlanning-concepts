@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import FormInput from '../form-input/form-input.js'
 import './inputFields.styles.scss'
 
@@ -12,13 +12,11 @@ const LoanField1 = ({handleChange, handleSubmit, clearData, inputData, calcData,
     const years = Math.floor(timeLeft/12);
     const months = timeLeft - (years * 12);
 
-
-
     return (
       <div className="form-container">
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit} className="form" aria-labelledby="loanInfo">
        <fieldset className="form-fieldset">
-         <legend className="form-legend">Input Loan Details</legend>
+         <legend className="form-legend" id="loanInfo">Input Loan Details</legend>
          <FormInput  name="balance" value={balance} onChange={handleChange} currency required ref={ref}>Input Current Balance</FormInput>
          <FormInput name="interest" value={interest} onChange={handleChange} percent required>Input Interest (annual) </FormInput>
          <FormInput name="payment" value={payment} onChange={handleChange} currency required>Input Monthly Payment</FormInput>
