@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import FormInput from '../form-input/form-input.js'
 import './inputFields.styles.scss'
 

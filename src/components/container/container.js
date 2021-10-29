@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect} from 'react'
+import React, { useState, useRef} from 'react'
 import LoanField1 from '../Inputs/inputField1';
 import LoanField2 from '../Inputs/inputField2';
 import {calcTime, calcFutureBalance, formStringToNum, validate, deleteSeparator, isEmpty} from '../../utils';
